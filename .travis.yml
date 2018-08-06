@@ -10,6 +10,10 @@ before_script:
 script:
   - docker build -t my-image .
   - docker images -a
-  - echo "1,1234" | docker run --name hi --rm -it my-image
+  - docker run --name hi --rm -d my-image
+  - docker logs hi
+  - docker ps -a
+  - docker stop hi
+  - docker rm hi
 after_script:
-  - docker stop
+  - docker images prune -f
