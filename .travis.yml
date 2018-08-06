@@ -1,0 +1,15 @@
+sudo: required
+
+services:
+  - docker
+
+before_script:
+  - ls -alh
+  - uname -a
+
+script:
+  - docker build -t my-image .
+  - docker images -a
+  - echo "1,1234" | docker run --name hi --rm -it my-image
+after_script:
+  - docker stop
