@@ -1,0 +1,18 @@
+sudo: required
+
+services:
+  - docker
+
+before_script:
+  - ls -alh
+  - uname -a
+
+script:
+  - docker build -t my-image .
+  - docker images -a
+  - docker run --name hi --rm -d my-image
+  - docker logs hi
+  - docker ps -a
+  - docker stop hi
+after_script:
+  - docker images prune -f
